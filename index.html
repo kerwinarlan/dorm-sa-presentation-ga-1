@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sampaguita Residence Hall - General Assembly 1st Sem AY 2026-2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Web & Halftone overlay background -->
+  <div class="web-bg-overlay"></div>
+  <div class="halftone-overlay"></div>
+
+  <!-- Top Action Bar for QoL Controls -->
+  <header class="top-controls">
+    <button class="qol-btn" onclick="toggleMenu()" title="Slide Index (M)">&#x2630; INDEX</button>
+    <button class="qol-btn" id="sfx-btn" onclick="toggleSFX()" title="Toggle Sound Effects">🔊 SFX ON</button>
+    <button class="qol-btn" id="bgm-btn" onclick="toggleBGM()" title="Toggle Background Music">🎵 BGM OFF</button>
+    <button class="qol-btn" onclick="openPollModal()" title="GA1 Date Poll">🗳️ POLL</button>
+    <button class="qol-btn" onclick="openHelpModal()" title="Keyboard Help (?)">❓ HELP</button>
+  </header>
+
+  <!-- Quick Jump Drawer / TOC Menu -->
+  <aside class="slide-drawer" id="slide-drawer">
+    <div class="drawer-header">
+      <h3>SLIDE INDEX</h3>
+      <button class="close-btn" onclick="toggleMenu()">&times;</button>
+    </div>
+    <ul class="drawer-list" id="drawer-list">
+      <!-- Populated dynamically by script.js -->
+    </ul>
+  </aside>
+
+  <!-- Main Presentation Container -->
+  <main class="presentation-container" id="presentation">
+    
+    <!-- SLIDE 1: TITLE SLIDE (BRAND NEW DAY THEME) -->
+    <section class="slide active" id="slide-1" data-title="Title Slide">
+      <div class="comic-panel panel-top-left">
+        <img src="assets/memes/spiderman-swing-panel.png" alt="Spider-Man Swinging Comic Panel">
+      </div>
+      <div class="comic-panel panel-bottom-right">
+        <img src="assets/memes/spiderman-thwip-panel.png" alt="Spider-Man THWIP Comic Panel">
+      </div>
+
+      <div class="slide-content title-layout">
+        <div class="bnd-tag-banner">🕷️ SPIDER-MAN: BRAND NEW DAY EDITION 🕷️</div>
+        <div class="badge-logo">SAMPAGUITA RESIDENCE HALL</div>
+        <h1 class="main-title">
+          <span>GENERAL</span>
+          <span>ASSEMBLY</span>
+        </h1>
+        <div class="subtitle-box">
+          <p class="subtitle">PLAN OF ACTIVITIES &bull; 1ST SEMESTER A.Y. 2026-2027</p>
+        </div>
+        <div class="date-badge">AUGUST 2026 - JANUARY 2027</div>
+        <div class="quote-badge">&ldquo;A Fresh Start for Sampa Dormers!&rdquo;</div>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: DORM MANAGERS & HOUSEPARENT -->
+    <section class="slide" id="slide-2" data-title="Dorm Managers & Houseparent">
+      <div class="slide-content content-layout">
+        <div class="header-badge">RESIDENCE HALL ADMINISTRATION</div>
+        <h2 class="content-title">DORM MANAGERS & HOUSEPARENT</h2>
+
+        <div class="staff-hero-grid">
+          <div class="staff-card border-gold">
+            <div class="photo-frame">
+              <img src="assets/staff_photos/maam-len.png" alt="Ma'am Len">
+            </div>
+            <div class="staff-role-badge">DORM MANAGER</div>
+            <h3>Ma'am Len</h3>
+            <p>Dorm Manager</p>
+          </div>
+
+          <div class="staff-card border-gold">
+            <div class="photo-frame">
+              <img src="assets/staff_photos/maam-zay.png" alt="Ma'am Zay">
+            </div>
+            <div class="staff-role-badge">OIC / DORM MANAGER</div>
+            <h3>Ma'am Zay</h3>
+            <p>Officer-in-Charge / Dorm Manager</p>
+          </div>
+
+          <div class="staff-card border-gold">
+            <div class="photo-frame">
+              <img src="assets/staff_photos/maam-gen.png" alt="Ma'am Gen">
+            </div>
+            <div class="staff-role-badge">HOUSEPARENT</div>
+            <h3>Ma'am Gen</h3>
+            <p>Houseparent</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: STUDENT ASSISTANTS (POINTING MEME EDITION) -->
+    <section class="slide" id="slide-3" data-title="Student Assistants">
+      <div class="slide-content content-layout">
+        <div class="header-badge">YOUR SA TEAM</div>
+        <h2 class="content-title">STUDENT ASSISTANTS</h2>
+
+        <div class="meme-callout-box">
+          <img src="assets/memes/spiderman-pointing.gif" alt="Spider-Man Pointing Meme" class="meme-inline-gif">
+          <span class="meme-quote">&ldquo;When dormers try to figure out which SA is on duty!&rdquo;</span>
+        </div>
+
+        <div class="sa-grid">
+          <div class="sa-card">
+            <div class="sa-photo-box">
+              <img src="assets/staff_photos/yelsah.png" alt="Yelsah">
+            </div>
+            <h4>Yelsah</h4>
+            <span class="sa-role">Student Assistant</span>
+          </div>
+
+          <div class="sa-card">
+            <div class="sa-photo-box">
+              <img src="assets/staff_photos/rachel.png" alt="Rachel">
+            </div>
+            <h4>Rachel</h4>
+            <span class="sa-role">Student Assistant</span>
+          </div>
+
+          <div class="sa-card">
+            <div class="sa-photo-box">
+              <img src="assets/staff_photos/jose.png" alt="Jose">
+            </div>
+            <h4>Jose</h4>
+            <span class="sa-role">Student Assistant</span>
+          </div>
+
+          <div class="sa-card highlight-sa">
+            <div class="sa-photo-box">
+              <img src="assets/staff_photos/ash.png" alt="Ash">
+            </div>
+            <h4>Ash</h4>
+            <span class="sa-role">GA1 Head / SA</span>
+          </div>
+
+          <div class="sa-card">
+            <div class="sa-photo-box">
+              <img src="assets/staff_photos/matt.png" alt="Matt">
+            </div>
+            <h4>Matt</h4>
+            <span class="sa-role">Student Assistant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: OFFICE & MAINTENANCE STAFF -->
+    <section class="slide" id="slide-4" data-title="Office & Maintenance Staff">
+      <div class="slide-content content-layout">
+        <div class="header-badge">SUPPORT TEAM</div>
+        <h2 class="content-title">OFFICE & MAINTENANCE STAFF</h2>
+
+        <div class="staff-section">
+          <h3 class="subsection-title center-text">ATE STAFF & KUYA STAFF</h3>
+          <div class="staff-photo-row">
+            <div class="person-card">
+              <img src="assets/staff_photos/ate-rhea.png" alt="Ate Rhea">
+              <h5>Ate Rhea</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/ate-december.png" alt="Ate December">
+              <h5>Ate December</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/ate-feny.png" alt="Ate Feny">
+              <h5>Ate Feny</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/ate-tere.png" alt="Ate Tere">
+              <h5>Ate Tere</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/kuya-bagyo.png" alt="Kuya Bagyo">
+              <h5>Kuya Bagyo</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/kuya-dani.png" alt="Kuya Dani">
+              <h5>Kuya Dani</h5>
+            </div>
+            <div class="person-card">
+              <img src="assets/staff_photos/kuya-emong.png" alt="Kuya Emong">
+              <h5>Kuya Emong</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: SECURITY PERSONNEL -->
+    <section class="slide" id="slide-5" data-title="Security Personnel">
+      <div class="slide-content content-layout">
+        <div class="header-badge">PROTECTORS OF SAMPA</div>
+        <h2 class="content-title">SECURITY PERSONNEL</h2>
+
+        <div class="security-grid">
+          <div class="sec-card">
+            <img src="assets/staff_photos/kuya-nard.png" alt="Kuya Nard">
+            <h4>Kuya Nard</h4>
+            <span>Security Guard</span>
+          </div>
+          <div class="sec-card">
+            <img src="assets/staff_photos/kuya-julius.png" alt="Kuya Julius">
+            <h4>Kuya Julius</h4>
+            <span>Security Guard</span>
+          </div>
+          <div class="sec-card">
+            <img src="assets/staff_photos/ate-jen.png" alt="Ate Jen">
+            <h4>Ate Jen</h4>
+            <span>Security Guard</span>
+          </div>
+          <div class="sec-card">
+            <img src="assets/staff_photos/ate-joh.png" alt="Ate Joh">
+            <h4>Ate Joh</h4>
+            <span>Security Guard</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: AGENDA / OVERVIEW -->
+    <section class="slide" id="slide-6" data-title="Plan of Activities Overview">
+      <div class="slide-content category-layout">
+        <div class="header-badge">OVERVIEW</div>
+        <h2 class="section-title">PLAN OF ACTIVITIES</h2>
+        
+        <div class="category-grid">
+          <div class="category-card card-red" onclick="goToSlide(6)">
+            <span class="card-num">01</span>
+            <h3>GA1 / AKWE</h3>
+            <p>August 31 - September 4</p>
+            <div class="card-tag">SPIDER-MAN THEME</div>
+          </div>
+
+          <div class="category-card card-dark" onclick="goToSlide(9)">
+            <span class="card-num">02</span>
+            <h3>HALLOWEEN WEEK</h3>
+            <p>October 19 - October 23</p>
+            <div class="card-tag">HORROR THEME</div>
+          </div>
+
+          <div class="category-card card-red" onclick="goToSlide(10)">
+            <span class="card-num">03</span>
+            <h3>GA2 / YEAR-END</h3>
+            <p>End of Semester</p>
+            <div class="card-tag">CELEBRATION</div>
+          </div>
+
+          <div class="category-card card-dark" onclick="goToSlide(11)">
+            <span class="card-num">04</span>
+            <h3>ADDITIONAL EVENTS</h3>
+            <p>Semester-Long</p>
+            <div class="card-tag">SPECIAL PROJECTS</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: GA1 / AKWE OVERVIEW & DECOR -->
+    <section class="slide" id="slide-7" data-title="GA1 / Akwe Overview & Decor">
+      <div class="slide-content content-layout">
+        <div class="header-badge">EVENT 01</div>
+        <h2 class="content-title">GA1 / AKWE: DETAILS & DECOR</h2>
+        
+        <div class="content-card">
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">HEAD</span>
+              <span class="info-val">Ash</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">DATE WINDOW</span>
+              <span class="info-val">Aug 31 - Sep 4 (Poll: Sept 1-3)</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">THEME</span>
+              <span class="info-val highlight">Spider-Man</span>
+            </div>
+          </div>
+
+          <hr class="card-divider">
+
+          <h3 class="subsection-title">VENUE & DECORATIONS SETUP</h3>
+          <div class="visual-pill-grid">
+            <div class="vpill">
+              <span class="vpill-icon">🎨</span>
+              <div>
+                <strong>Banderitas Decor</strong>
+                <p>Red, blue, white, & black crepe paper</p>
+              </div>
+            </div>
+            <div class="vpill">
+              <span class="vpill-icon">🕸️</span>
+              <div>
+                <strong>Yarn Spider Webs</strong>
+                <p>Reusable for Halloween Week!</p>
+              </div>
+            </div>
+            <div class="vpill">
+              <span class="vpill-icon">📸</span>
+              <div>
+                <strong>Photo-Booth Zone</strong>
+                <p>Spider-Man printouts & props</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: GA1 INTERACTIVE BULLETIN BOARD -->
+    <section class="slide" id="slide-8" data-title="GA1 Interactive Bulletin Board">
+      <div class="slide-content content-layout">
+        <div class="header-badge">GA1 FEATURE</div>
+        <h2 class="content-title">INTERACTIVE BULLETIN BOARD</h2>
+
+        <div class="content-card hero-card">
+          <div class="prompt-box">
+            <span class="prompt-tag">BOARD PROMPT</span>
+            <p class="prompt-text">&ldquo;If you were to be forgotten by everyone, what will be the first thing that you will do?&rdquo;</p>
+          </div>
+
+          <div class="feature-columns">
+            <div class="feature-box">
+              <h4>📋 SETUP & MATERIALS</h4>
+              <ul class="bullet-list-punchy">
+                <li>Bond paper squares</li>
+                <li>Decorative tape</li>
+                <li>Writing pens & markers</li>
+              </ul>
+            </div>
+            <div class="feature-box highlight-box">
+              <h4>🍬 DORMER INCENTIVE</h4>
+              <ul class="bullet-list-punchy">
+                <li><strong>FREE CANDIES!</strong></li>
+                <li>Answer prompt while in line!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: GA1 PROGRAM & ACQUAINTANCE PARTY -->
+    <section class="slide" id="slide-9" data-title="GA1 Program & Acquaintance Party">
+      <div class="slide-content content-layout">
+        <div class="header-badge">GA1 PROGRAM</div>
+        <h2 class="content-title">PROGRAM & ACQUAINTANCE PARTY</h2>
+
+        <div class="meme-callout-box accent-yellow">
+          <img src="assets/memes/spiderman-thwip-panel.png" alt="Spider-Man Action Panel" class="meme-inline-gif">
+          <span class="meme-quote">&ldquo;Me when free candies, tsitsirya, and dorm essentials are announced!&rdquo;</span>
+        </div>
+
+        <div class="two-column-layout">
+          <div class="content-card">
+            <h3 class="column-title">GA PROGRAM FLOW</h3>
+            <div class="visual-flow-list">
+              <div class="vflow-item"><span class="vstep">1</span> Welcoming Remarks</div>
+              <div class="vflow-item"><span class="vstep">2</span> Special Performer</div>
+              <div class="vflow-item"><span class="vstep">3</span> Hero Icebreaker Game</div>
+              <div class="vflow-item"><span class="vstep">4</span> Presentation Deck</div>
+            </div>
+            <button class="action-card-btn" onclick="openGameModal()">🎮 LAUNCH ICEBREAKER GAME</button>
+          </div>
+
+          <div class="content-card">
+            <h3 class="column-title">PARTY GAMES & PRIZES</h3>
+            <div class="game-list">
+              <span class="game-badge">🐾 Animal Sounds</span>
+              <span class="game-badge">🎈 Balloon Pop</span>
+              <span class="game-badge">🎭 Charades Relay</span>
+              <span class="game-badge">🏃 1-2-3 Go!</span>
+            </div>
+            <h4 class="sub-header">🏆 WINNER PRIZES</h4>
+            <div class="prizes-grid">
+              <div class="prize-pill">🍬 Candy</div>
+              <div class="prize-pill">🍿 Tsitsirya</div>
+              <div class="prize-pill">🍜 Instant Noodles</div>
+              <div class="prize-pill">🧼 Laundry Soap</div>
+              <div class="prize-pill">🥫 Canned Goods</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 10: HALLOWEEN PARTY WEEK (PUNCHY VISUAL CARDS) -->
+    <section class="slide" id="slide-10" data-title="Halloween Party Week">
+      <div class="slide-content content-layout">
+        <div class="header-badge">EVENT 02</div>
+        <h2 class="content-title">HALLOWEEN PARTY WEEK</h2>
+
+        <div class="content-card">
+          <div class="event-meta">
+            <div class="meta-badge">📅 OCT 19 - OCT 23</div>
+            <div class="meta-badge alert">🎃 HORROR THEME</div>
+          </div>
+
+          <div class="activities-grid-visual">
+            <div class="vact-card">
+              <span class="vact-icon">👻</span>
+              <div>
+                <h4>Interactive Board</h4>
+                <p>Prompt: <em>&ldquo;What's your horror story?&rdquo;</em></p>
+              </div>
+            </div>
+
+            <div class="vact-card">
+              <span class="vact-icon">🍿</span>
+              <div>
+                <h4>Outdoor Movie Night</h4>
+                <p>Open-air film screening under the stars</p>
+              </div>
+            </div>
+
+            <div class="vact-card">
+              <span class="vact-icon">🤝</span>
+              <div>
+                <h4>Sampa x Kamia Night</h4>
+                <p>Joint Halloween open house & collab</p>
+              </div>
+            </div>
+
+            <div class="vact-card">
+              <span class="vact-icon">🕸️</span>
+              <div>
+                <h4>Room & Corridor Contest</h4>
+                <p>&ldquo;Spookiest Decor&rdquo; floor competition</p>
+              </div>
+            </div>
+
+            <div class="vact-card full-width">
+              <span class="vact-icon">🎭</span>
+              <div>
+                <h4>Photobooth & Live Performers</h4>
+                <p>Themed photo station with live musical performances all week!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: GA2 / YEAR-END PARTY (PUNCHY VISUAL CARDS) -->
+    <section class="slide" id="slide-11" data-title="GA2 / Year-End Party">
+      <div class="slide-content content-layout">
+        <div class="header-badge">EVENT 03</div>
+        <h2 class="content-title">GA2 / YEAR-END PARTY</h2>
+
+        <div class="content-card">
+          <div class="event-meta">
+            <div class="meta-badge">📅 END OF SEMESTER</div>
+            <div class="meta-badge">🎉 FELLOWSHIP & CELEBRATION</div>
+          </div>
+
+          <div class="yearend-cards-grid">
+            <div class="ycard">
+              <span class="ycard-icon">🎁</span>
+              <h4>WHITE ELEPHANT</h4>
+              <p>Low-cost exchange gift swap</p>
+            </div>
+
+            <div class="ycard">
+              <span class="ycard-icon">🎟️</span>
+              <h4>BINGO NIGHT</h4>
+              <p>Classic dorm bingo with prizes</p>
+            </div>
+
+            <div class="ycard">
+              <span class="ycard-icon">🏆</span>
+              <h4>SEMESTER WRAP-UP</h4>
+              <p>SA recognition & achievements</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: POSSIBLE ADDITIONAL EVENTS -->
+    <section class="slide" id="slide-12" data-title="Possible Additional Events">
+      <div class="slide-content content-layout">
+        <div class="header-badge">SPECIAL EVENTS</div>
+        <h2 class="content-title">POSSIBLE ADDITIONAL EVENTS</h2>
+
+        <div class="two-column-layout">
+          <div class="content-card">
+            <h3 class="column-title">🎨 MENTAL HEALTH WEEK</h3>
+            <span class="sub-tag">Mental Health & The Arts</span>
+            <div class="visual-pill-list">
+              <div class="vpill-compact">🖌️ Big Canvas Bulletin Board</div>
+              <div class="vpill-compact">🖍️ Outdoor Chalk Art Zone</div>
+              <div class="vpill-compact">🎨 Coloring & Craft Therapy</div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <h3 class="column-title">🏆 GAME NIGHTS</h3>
+            <span class="sub-tag">Corridor Wars</span>
+            <div class="visual-pill-list">
+              <div class="vpill-compact">⚔️ Weekly Corridor Tournament</div>
+              <div class="vpill-compact">🥇 Monthly Grand Award</div>
+              <div class="vpill-compact">🤝 Floor Rivalry & Teamwork</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 13: DAY TO DAY LIVING (SMALL POTATO VS BIG POTATO MEME) -->
+    <section class="slide" id="slide-13" data-title="Day to Day Living Reminders">
+      <div class="slide-content content-layout">
+        <div class="header-badge">DORM GUIDELINES</div>
+        <h2 class="content-title">DAY TO DAY LIVING REMINDERS</h2>
+
+        <div class="potato-meme-banner">
+          <div class="potato-box small-potato">
+            <span class="potato-tag">🥔 SMALL POTATO STUFF</span>
+            <p>Forgetting your key or desk lamp light.</p>
+          </div>
+          <div class="potato-box big-potato">
+            <span class="potato-tag">🍟 BIG POTATO STUFF</span>
+            <p>Undeclared high-wattage electrical items!</p>
+          </div>
+        </div>
+
+        <div class="two-column-layout" style="margin-top: 16px;">
+          <div class="content-card">
+            <h3 class="column-title">⚡ ELECTRICAL DECLARATION</h3>
+            <div class="visual-pill-list">
+              <div class="vpill-compact">🌀 Electric Fans & Desk Lamps</div>
+              <div class="vpill-compact">💻 Laptops, Desktops, & Printers</div>
+              <div class="vpill-compact">📱 Cellphones & Tablets</div>
+            </div>
+          </div>
+
+          <div class="content-card">
+            <h3 class="column-title">📚 STUDY & COMMON AREAS</h3>
+            <div class="visual-pill-list">
+              <div class="vpill-compact">🥪 Light Snacks Only (No meals)</div>
+              <div class="vpill-compact">🧹 Clean Up After Use</div>
+              <div class="vpill-compact">🔐 Guard Your Gadgets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 14: SUMMARY & NEXT STEPS (RESPONSIBILITY QUOTE) -->
+    <section class="slide" id="slide-14" data-title="Next Steps & Poll">
+      <div class="slide-content content-layout">
+        <div class="header-badge">ACTION PLAN</div>
+        <h2 class="content-title">NEXT STEPS & POLL</h2>
+
+        <div class="great-power-banner">
+          &ldquo;WITH GREAT DORM COMMUNITY COMES GREAT RESPONSIBILITY!&rdquo;
+        </div>
+
+        <div class="content-card hero-card" style="margin-top: 16px;">
+          <div class="next-steps-grid">
+            <div class="step-card">
+              <span class="step-num">1</span>
+              <h4>GA1 Date Poll</h4>
+              <p>Poll deadline: <strong>August 31</strong>. Option dates: <strong>Sept 1 - Sept 3</strong>.</p>
+              <button class="mini-poll-btn" onclick="openPollModal()">VOTE NOW</button>
+            </div>
+
+            <div class="step-card">
+              <span class="step-num">2</span>
+              <h4>Decor Prep</h4>
+              <p>Gather crepe paper, yarn, tape, and Spider-Man printouts by <strong>Aug 31</strong>.</p>
+            </div>
+
+            <div class="step-card">
+              <span class="step-num">3</span>
+              <h4>Prizes & Materials</h4>
+              <p>Secure candies, tsitsirya, and dorm essentials before assembly.</p>
+            </div>
+          </div>
+
+          <div class="open-floor-box">
+            <h3>OPEN FLOOR</h3>
+            <p>Questions, suggestions, or committee sign-ups?</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navigation Controls Footer -->
+  <footer class="nav-controls">
+    <button class="nav-btn" id="prev-btn" onclick="prevSlide()">&larr; PREV</button>
+    <div class="slide-counter" id="counter">1 / 14</div>
+    <button class="nav-btn" id="next-btn" onclick="nextSlide()">NEXT &rarr;</button>
+    <button class="nav-btn icon-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">&#x26F6;</button>
+  </footer>
+
+  <!-- QoL MODAL: GA1 DATE POLL -->
+  <div class="modal-overlay" id="poll-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closePollModal()">&times;</button>
+      <h3>🗳️ GA1 / AKWE DATE POLL</h3>
+      <p class="modal-subtitle">Choose your preferred date window for GA1:</p>
+      <div class="poll-options">
+        <button class="poll-btn" onclick="castVote('Sept 1 (Mon)')">Sept 1 (Monday)</button>
+        <button class="poll-btn" onclick="castVote('Sept 2 (Tue)')">Sept 2 (Tuesday)</button>
+        <button class="poll-btn" onclick="castVote('Sept 3 (Wed)')">Sept 3 (Wednesday)</button>
+      </div>
+      <div id="vote-result" class="vote-result"></div>
+    </div>
+  </div>
+
+  <!-- QoL MODAL: ICEBREAKER GAME -->
+  <div class="modal-overlay" id="game-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeGameModal()">&times;</button>
+      <h3>🎮 SPIDER-MAN HERO ICEBREAKER</h3>
+      <p class="modal-subtitle">Interactive Game Soundboard & Video Link:</p>
+      <div class="game-modal-body">
+        <a href="https://www.youtube.com/watch?v=NB5O5S-NQ9Y" target="_blank" class="yt-link-btn">▶️ Open YouTube Icebreaker Game</a>
+        <hr class="card-divider">
+        <p><strong>Sound Effects Board:</strong></p>
+        <div class="sfx-grid">
+          <button class="sfx-pad" onclick="playSoundEffect('web')">🕸️ Web Shooter</button>
+          <button class="sfx-pad" onclick="playSoundEffect('cheer')">🎉 Crowd Cheer</button>
+          <button class="sfx-pad" onclick="playSoundEffect('buzzer')">🔔 Game Bell</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QoL MODAL: KEYBOARD HELP -->
+  <div class="modal-overlay" id="help-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeHelpModal()">&times;</button>
+      <h3>❓ KEYBOARD SHORTCUTS</h3>
+      <ul class="help-list">
+        <li><kbd>&rarr;</kbd> / <kbd>Space</kbd> / <kbd>PageDown</kbd> : Next Slide</li>
+        <li><kbd>&larr;</kbd> / <kbd>PageUp</kbd> : Previous Slide</li>
+        <li><kbd>Home</kbd> / <kbd>End</kbd> : Jump to First / Last Slide</li>
+        <li><kbd>M</kbd> : Toggle Slide Index Drawer</li>
+        <li><kbd>F</kbd> : Fullscreen Toggle</li>
+        <li><kbd>Esc</kbd> : Close Modals / Drawer</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
