@@ -1,15 +1,17 @@
-// PRESENTATION NAVIGATION, AUDIO & MOBILE CONTROLS SCRIPT
+// PRESENTATION NAVIGATION, AUDIO, DECK CAROUSEL & MOBILE CONTROLS SCRIPT
 
 let currentSlide = 0;
 let sfxEnabled = true;
 let bgmEnabled = false;
 let bgmInterval = null;
-let bgmAudioCtx = null;
 
 const slides = document.querySelectorAll('.slide');
 const counter = document.getElementById('counter');
 const drawerList = document.getElementById('drawer-list');
 const totalSlides = slides.length;
+
+// DECK STATES
+const deckStates = {};
 
 // WEB AUDIO SYNTHESIZER FOR SOUND EFFECTS & BGM
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -28,7 +30,6 @@ function playSoundEffect(type) {
   const now = audioCtx.currentTime;
 
   if (type === 'slide') {
-    // Web Shooter / Slide Swoosh
     osc.type = 'triangle';
     osc.frequency.setValueAtTime(150, now);
     osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
@@ -37,7 +38,6 @@ function playSoundEffect(type) {
     osc.start(now);
     osc.stop(now + 0.12);
   } else if (type === 'web') {
-    // Web shooter
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(800, now);
     osc.frequency.exponentialRampToValueAtTime(200, now + 0.15);
@@ -46,7 +46,6 @@ function playSoundEffect(type) {
     osc.start(now);
     osc.stop(now + 0.15);
   } else if (type === 'cheer') {
-    // Crowd cheer
     [400, 500, 600, 800].forEach((freq) => {
       const o = audioCtx.createOscillator();
       const g = audioCtx.createGain();
@@ -59,7 +58,6 @@ function playSoundEffect(type) {
       o.stop(now + 0.4);
     });
   } else if (type === 'buzzer') {
-    // Game bell
     osc.type = 'sine';
     osc.frequency.setValueAtTime(880, now);
     gain.gain.setValueAtTime(0.4, now);
@@ -69,7 +67,7 @@ function playSoundEffect(type) {
   }
 }
 
-// AMBIENT SPIDER-MAN SYNTH BGM LOOP
+// BGM CONTROL
 function toggleBGM() {
   bgmEnabled = !bgmEnabled;
   const bgmBtn = document.getElementById('bgm-btn');
@@ -87,10 +85,8 @@ function startBGMLoop() {
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
-
   stopBGMLoop();
 
-  // Gentle superhero arpeggio progression (A minor / Heroic vibe)
   const notes = [220, 261.63, 329.63, 440, 329.63, 261.63, 196, 246.94, 293.66, 392, 293.66, 246.94];
   let noteIdx = 0;
 
@@ -124,6 +120,51 @@ function stopBGMLoop() {
 function toggleSFX() {
   sfxEnabled = !sfxEnabled;
   document.getElementById('sfx-btn').textContent = sfxEnabled ? '🔊 SFX ON' : '🔇 SFX OFF';
+}
+
+// INTERACTIVE CARD DECK CAROUSEL LOGIC
+function initDecks() {
+  document.querySelectorAll('.interactive-deck-wrapper').forEach((wrapper) => {
+    const id = wrapper.id;
+    deckStates[id] = 0;
+    updateDeckView(id);
+  });
+}
+
+function cycleDeck(deckId, direction) {
+  const wrapper = document.getElementById(deckId);
+  if (!wrapper) return;
+  const cards = wrapper.querySelectorAll('.deck-card');
+  const count = cards.length;
+  if (count === 0) return;
+
+  deckStates[deckId] = (deckStates[deckId] + direction + count) % count;
+  updateDeckView(deckId);
+  playSoundEffect('web');
+}
+
+function updateDeckView(deckId) {
+  const wrapper = document.getElementById(deckId);
+  if (!wrapper) return;
+  const cards = wrapper.querySelectorAll('.deck-card');
+  const counterBadge = document.getElementById(`counter-${deckId}`);
+  const count = cards.length;
+  const activeIdx = deckStates[deckId];
+
+  cards.forEach((card, idx) => {
+    card.classList.remove('active', 'next', 'prev');
+    if (idx === activeIdx) {
+      card.classList.add('active');
+    } else if (idx === (activeIdx + 1) % count) {
+      card.classList.add('next');
+    } else if (idx === (activeIdx - 1 + count) % count) {
+      card.classList.add('prev');
+    }
+  });
+
+  if (counterBadge) {
+    counterBadge.textContent = `${activeIdx + 1} / ${count}`;
+  }
 }
 
 // POPULATE SLIDE DRAWER
@@ -265,7 +306,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// TOUCH / SWIPE CONTROLS FOR MOBILE & MESSENGER IN-APP BROWSER
+// TOUCH / SWIPE CONTROLS FOR MOBILE & MESSENGER BROWSER
 let touchStartX = 0;
 let touchEndX = 0;
 let touchStartY = 0;
@@ -282,7 +323,15 @@ document.addEventListener('touchend', (e) => {
   const diffX = touchEndX - touchStartX;
   const diffY = touchEndY - touchStartY;
 
-  // Ensure horizontal swipe is dominant over vertical scroll
+  // Check if touch target is inside a card deck
+  const deckWrapper = e.target.closest('.interactive-deck-wrapper');
+  if (deckWrapper && Math.abs(diffX) > 30) {
+    if (diffX < 0) cycleDeck(deckWrapper.id, 1);
+    if (diffX > 0) cycleDeck(deckWrapper.id, -1);
+    return;
+  }
+
+  // Otherwise change presentation slides
   if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
     if (diffX < 0) nextSlide();
     if (diffX > 0) prevSlide();
@@ -290,4 +339,5 @@ document.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 // INITIALIZE
+initDecks();
 updateSlideView();
