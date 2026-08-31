@@ -1,4 +1,4 @@
-// PRESENTATION NAVIGATION, AUDIO, DECK CAROUSEL & MOBILE CONTROLS SCRIPT
+// PRESENTATION NAVIGATION, AUDIO, AUTO-FLIP DECK CAROUSEL & MOBILE CONTROLS SCRIPT
 
 let currentSlide = 0;
 let sfxEnabled = true;
@@ -10,8 +10,9 @@ const counter = document.getElementById('counter');
 const drawerList = document.getElementById('drawer-list');
 const totalSlides = slides.length;
 
-// DECK STATES
+// DECK STATES & AUTO-FLIP TIMERS
 const deckStates = {};
+const deckTimers = {};
 
 // WEB AUDIO SYNTHESIZER FOR SOUND EFFECTS & BGM
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -122,25 +123,57 @@ function toggleSFX() {
   document.getElementById('sfx-btn').textContent = sfxEnabled ? '🔊 SFX ON' : '🔇 SFX OFF';
 }
 
-// INTERACTIVE CARD DECK CAROUSEL LOGIC
+// INTERACTIVE CARD DECK CAROUSEL LOGIC WITH AUTO-FLIP
 function initDecks() {
   document.querySelectorAll('.interactive-deck-wrapper').forEach((wrapper) => {
     const id = wrapper.id;
     deckStates[id] = 0;
     updateDeckView(id);
+
+    // Auto-flip timer (every 3.5 seconds)
+    startDeckAutoFlip(id);
+
+    // Pause auto-flip on hover or touch
+    wrapper.addEventListener('mouseenter', () => stopDeckAutoFlip(id));
+    wrapper.addEventListener('mouseleave', () => startDeckAutoFlip(id));
+    wrapper.addEventListener('touchstart', () => stopDeckAutoFlip(id), { passive: true });
   });
 }
 
-function cycleDeck(deckId, direction) {
+function startDeckAutoFlip(deckId) {
+  stopDeckAutoFlip(deckId);
+  deckTimers[deckId] = setInterval(() => {
+    cycleDeck(deckId, 1, true);
+  }, 3500);
+}
+
+function stopDeckAutoFlip(deckId) {
+  if (deckTimers[deckId]) {
+    clearInterval(deckTimers[deckId]);
+    deckTimers[deckId] = null;
+  }
+}
+
+function cycleDeck(deckId, direction, isAuto = false) {
   const wrapper = document.getElementById(deckId);
   if (!wrapper) return;
+
+  // Only auto-flip if the slide containing this deck is active
+  const slide = wrapper.closest('.slide');
+  if (isAuto && slide && !slide.classList.contains('active')) {
+    return;
+  }
+
   const cards = wrapper.querySelectorAll('.deck-card');
   const count = cards.length;
   if (count === 0) return;
 
   deckStates[deckId] = (deckStates[deckId] + direction + count) % count;
   updateDeckView(deckId);
-  playSoundEffect('web');
+
+  if (!isAuto) {
+    playSoundEffect('web');
+  }
 }
 
 function updateDeckView(deckId) {
@@ -323,7 +356,6 @@ document.addEventListener('touchend', (e) => {
   const diffX = touchEndX - touchStartX;
   const diffY = touchEndY - touchStartY;
 
-  // Check if touch target is inside a card deck
   const deckWrapper = e.target.closest('.interactive-deck-wrapper');
   if (deckWrapper && Math.abs(diffX) > 30) {
     if (diffX < 0) cycleDeck(deckWrapper.id, 1);
@@ -331,7 +363,6 @@ document.addEventListener('touchend', (e) => {
     return;
   }
 
-  // Otherwise change presentation slides
   if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
     if (diffX < 0) nextSlide();
     if (diffX > 0) prevSlide();
