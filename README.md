@@ -1,6 +1,6 @@
 # dorm-sa-presentation-ga-1
 
-Spider-Man Brand New Day themed General Assembly 1 (GA1) presentation deck and Plan of Activities for Sampaguita Residence Hall (Sampa), 1st Semester A.Y. 2026-2027.
+Spider-Man Brand New Day themed General Assembly 1 (GA1) presentation deck and Plan of Activities for [NAME] Residence Hall.
 
 ## Features
 
